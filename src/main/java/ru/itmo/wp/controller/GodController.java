@@ -8,6 +8,7 @@ import ru.itmo.wp.domain.*;
 import ru.itmo.wp.exception.LinkException;
 import ru.itmo.wp.security.AnyRole;
 import ru.itmo.wp.security.Guest;
+import ru.itmo.wp.service.CodeLinkService;
 import ru.itmo.wp.service.CodeService;
 import ru.itmo.wp.service.UserService;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class GodController extends ApiController {
     private final CodeService codeService;
     private final UserService userService;
+    private final CodeLinkService codeLinkService;
 
     @AnyRole(Access.Name.GOD)
     @GetMapping("code")
@@ -51,24 +53,25 @@ public class GodController extends ApiController {
 
     @AnyRole(Access.Name.GOD)
     @GetMapping("code/{id}")
-    public Code findCodeById(@PathVariable String id) {
+    public CodeDescription findCodeById(@PathVariable String id) {
         CodeDescription code = codeService.findById(parseId(id));
         if (code == null)
             throw new LinkException();
-        return code.getCode();
+        return code;
     }
 
     @AnyRole(Access.Name.GOD)
     @GetMapping("code/link/{link}")
     public CodeDescription findLink(@PathVariable String link) {
-        CodeLink codeLink = codeService.findByLink(link);
+        CodeLink codeLink = codeLinkService.findByLink(link);
         if (codeLink == null)
             throw new LinkException();
         return codeLink.getCode();
     }
 
-    public GodController(CodeService codeService, UserService userService) {
+    public GodController(CodeService codeService, UserService userService, CodeLinkService codeLinkService) {
         this.codeService = codeService;
         this.userService = userService;
+        this.codeLinkService = codeLinkService;
     }
 }

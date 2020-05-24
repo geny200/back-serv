@@ -2,7 +2,6 @@ package ru.itmo.wp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.itmo.wp.domain.Access;
 import ru.itmo.wp.domain.Language;
 
 public interface LanguageRepository extends JpaRepository<Language, Long> {

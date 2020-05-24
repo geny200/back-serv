@@ -2,9 +2,7 @@ package ru.itmo.wp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.itmo.wp.domain.Code;
 import ru.itmo.wp.domain.ExecutableCode;
-import ru.itmo.wp.domain.User;
 
 import java.util.List;
 

@@ -8,7 +8,6 @@ import ru.itmo.wp.repository.ExecutableCodeRepository;
 import ru.itmo.wp.repository.TaskRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {

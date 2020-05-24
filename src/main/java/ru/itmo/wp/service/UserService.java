@@ -1,7 +1,6 @@
 package ru.itmo.wp.service;
 
 import org.springframework.stereotype.Service;
-import ru.itmo.wp.domain.Access;
 import ru.itmo.wp.domain.User;
 import ru.itmo.wp.form.RegisterCredentials;
 import ru.itmo.wp.repository.AccessRepository;

@@ -29,6 +29,10 @@ public class CodeService {
         return codeDescriptionRepository.findByUser(id);
     }
 
+    public CodeDescription findById(long id) {
+        return codeDescriptionRepository.findById(id);
+    }
+
     public List<CodeDescription> findAll() {
         return codeDescriptionRepository.findAll();
     }
