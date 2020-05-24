@@ -38,6 +38,7 @@ public class CodeDescription {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "language_id", nullable = false)
     private Language language;
 
     @JsonIgnore

@@ -1,5 +1,9 @@
 package ru.itmo.wp.form;
 
+import ru.itmo.wp.domain.Language;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,8 +15,8 @@ public class CodeCredentials {
     private String code;
 
     @NotNull
-    @NotEmpty
-    private String language;
+    @Enumerated(EnumType.STRING)
+    private Language.Lang language;
 
     public String getCode() {
         return code;
@@ -22,11 +26,11 @@ public class CodeCredentials {
         this.code = code;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Language.Lang language) {
         this.language = language;
     }
 
-    public String getLanguage() {
+    public Language.Lang getLanguage() {
         return language;
     }
 }

@@ -3,24 +3,22 @@ package ru.itmo.wp.service;
 import org.springframework.stereotype.Service;
 import ru.itmo.wp.domain.*;
 import ru.itmo.wp.form.CodeCredentials;
-import ru.itmo.wp.form.LinkCredentials;
-import ru.itmo.wp.repository.AccessRepository;
 import ru.itmo.wp.repository.CodeDescriptionRepository;
 import ru.itmo.wp.repository.CodeRepository;
-import ru.itmo.wp.repository.LinkCodeRepository;
-import org.hashids.*;
+import ru.itmo.wp.repository.LanguageRepository;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CodeService {
     private final CodeDescriptionRepository codeDescriptionRepository;
     private final CodeRepository codeRepository;
+    private final LanguageRepository languageRepository;
 
-    public CodeService(CodeDescriptionRepository codeDescriptionRepository, CodeRepository codeRepository) {
+    public CodeService(CodeDescriptionRepository codeDescriptionRepository, CodeRepository codeRepository, LanguageRepository languageRepository) {
         this.codeDescriptionRepository = codeDescriptionRepository;
         this.codeRepository = codeRepository;
+        this.languageRepository = languageRepository;
     }
 
     public CodeDescription findByIdAndUser(long codeId, long userId) {
@@ -35,12 +33,12 @@ public class CodeService {
         return codeDescriptionRepository.findAll();
     }
 
-    public void createCode(User user, CodeCredentials taskCredentials) {
+    public void createCode(User user, CodeCredentials codeCredentials) {
         CodeDescription codeDescription = new CodeDescription();
         Code code = new Code();
-        code.setCode(taskCredentials.getCode());
+        code.setCode(codeCredentials.getCode());
         user.addCode(codeDescription);
-        //codeDescription.setLanguage();
+        codeDescription.setLanguage(languageRepository.findByName(codeCredentials.getLanguage().name()));
         codeRepository.save(code);
         codeDescriptionRepository.save(codeDescription);
     }

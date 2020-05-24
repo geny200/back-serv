@@ -42,6 +42,6 @@ public class Language {
     public enum Lang {
         JAVA,
         CPP,
-        Haskell
+        HASKELL
     }
 }
